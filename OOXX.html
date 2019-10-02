@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+    <script>
+     var start =0;
+     function SetPoint(obj){
+         if(obj.innerText==""&start==0){
+             obj.innerText='0';
+             start=1;
+         }
+         else if(obj.innerText==""&&start==1){
+             obj.innerText='X';
+             start=0;
+         }
+     }
+    </script>
+</head>
+
+<body>
+    
+    <table border="1" id='table1' style="width: 300px; height: 300px;">
+        <caption>
+        <h4>OOXX遊戲</h4>
+        </caption>
+        <tr>
+            <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c1" 
+            onclick="SetPoint(document.getElementById('c1'))">&#32</td>
+            <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c2" 
+            onclick="SetPoint(document.getElementById('c2'))">&#32</td>
+            <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c3" 
+            onclick="SetPoint(document.getElementById('c3'))">&#32</td>
+
+
+        </tr>
+        <tr>
+                <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c4" 
+            onclick="SetPoint(document.getElementById('c4'))">&#32</td>
+            <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c5" 
+            onclick="SetPoint(document.getElementById('c5'))">&#32</td>
+            <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c6" 
+            onclick="SetPoint(document.getElementById('c6'))">&#32</td>
+        </tr>
+        <tr>
+                <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c7" 
+            onclick="SetPoint(document.getElementById('c7'))">&#32</td>
+            <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c8" 
+            onclick="SetPoint(document.getElementById('c8'))">&#32</td>
+            <td style="height: 60px;width: 60px;" align='center' valign="middle" id="c9" 
+            onclick="SetPoint(document.getElementById('c9'))">&#32</td>
+    
+    
+            </tr>
+    </table>
+</body>
+
+</html>
