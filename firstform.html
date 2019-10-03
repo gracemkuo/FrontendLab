@@ -6,6 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script>
+            //getElementById(抓取頁面上的元素)
+            function getElement(name) {
+              return document.getElementById(name);
+            }
+        
+            //判斷是否可以送件
+            function Button_Submit() {
+              //抓取頁面上的checkboc1，取得是否checked
+              var isChecked = getElement('MustCheck').checked;
+              //如果是，就return true
+              if (isChecked) return true;
+              //否則就... 
+              alert('必須勾選同意!');
+              return false;
+            }
+        
+            //當網頁載入完成後執行
+            window.onload = function () {
+              //hook event(在form1被submit時...)
+              getElement('form1').onsubmit = function () {
+              //呼叫 Button_Submit()
+                return Button_Submit();
+              };
+            };
+          </script>
 </head>
 
 <body>
@@ -52,8 +78,10 @@
         <label>其他地址:</label>
         <input type="text" placeholder="" value="" id="address" name="_address"><br />
         </fieldset>
+        <input type="checkbox" id="MustCheck" name="MustCheck">       同意使用個資...<br/>
         <input type="submit" value="送出" name="_sub">
         <input type="reset" value="清除" name="_clean">
+       
     </form>
 </body>
 
