@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form1" 
+    action=" http://isbaas.azurewebsites.net/WebForms/Form2Mail.aspx?mailto=gracemkuo841210@gmail.com&redirect=http://www.google.com"
+     method="POST">
+        
+    <fieldset>
+        <legend>個人資料--<i>必填</i></legend>
+       
+            <label>姓名:</label>
+            <input type="text" placeholder="" value="" id="name" name="_name"><br />
+            <label>密碼</label>
+            <input password="text" placeholder="" value="" id="pwd" name="_pwd"><br />
+            <label>性別:</label>
+            <input type="radio" value="1" id="男生" name="_sex">
+            <label>男生</label>
+            <input type="radio" value="2" id="女生" name="_sex">
+            <label>女生</label>
+      
+    </fieldset>
+    <fieldset>
+            <legend>個人資料--<i>興趣</i></legend>
+            <form>
+                <label>興趣:</label>
+                <input type="checkbox" value="10" id="music" name="_music">音樂
+                <input type="checkbox" value="11" id="exe" name="_exe">運動
+                <input type="checkbox" value="12" id="read" name="_read">閱讀
+                <input type="checkbox" value="13" id="movie" name="_movie">電影<br />
+                <label>專長:</label>
+                <textarea id="good" cols="50" rows="5"></textarea>
+       
+        </fieldset>
+        <fieldset>
+            <legend>個人資料--<i>地址</i></legend>
+        <label>郵遞區號:</label>
+        <input type="text" placeholder="" value="" id="code" name="_code"><br />
+        <label>縣市:</label>
+        <select name="city">
+            <option value="tpe" selected>台北</option>
+            <option value="Hsinchu" >新竹</option>
+            <option value="newtaipei" >新北</option>
+            <option value="tainan" >台南</option>
+        </select><br/>
+        <label>其他地址:</label>
+        <input type="text" placeholder="" value="" id="address" name="_address"><br />
+        </fieldset>
+        <input type="submit" value="送出" name="_sub">
+        <input type="reset" value="清除" name="_clean">
+    </form>
+</body>
+
+</html>
