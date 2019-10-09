@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Typecal</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+
+        function Showans() {
+            var formula = document.getElementById('inputarea').value;
+            var input=eval(formula);
+            return document.getElementById('result').innerText = input;
+        }
+        function Btnclick(){
+            Showans();
+        }
+    </script>
+</head>
+
+<body>
+    <form style="margin: 10%">
+        <div class="formgroup ">
+            <label>運算式</label>
+
+        </div>
+        <div class="formgroup">
+            <textarea class="inputarea" id="inputarea" rows="4"></textarea>
+        </div>
+        <div class="formgroup">
+            <button type="button" class="btn btn-primary" onclick="Btnclick();">運算</button> </div>
+        </div>
+        <div class="formgroup">
+            <label id="result"></label>
+
+        </div>
+    </form>
+</body>
+
+</html>
