@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Google翻譯</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+
+        function screen() {
+            $('#leftbutton').click(function () {
+                var source = $('#textleft').val()
+                var language=$('#').val()
+                trans(source,language,0)
+            });
+            $('#rightbutton').click(function () {
+                var source = $('#textright').val()
+                var language=$('#').val()
+                translate(source,language,1)
+
+
+        }
+
+
+        function translate(source,language,k) {
+            $.ajax({
+                type: "post",
+                headers: {
+
+                    "Ocp-Apim-Subscription-Key": "236f9e3f86714f0191a5d83eb4378dfd",
+                    "Content-Type": "application/json"
+                },
+                url: 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en&to=ja',
+                data: JSON.stringify([{ "Text": source }]), //要翻譯的文字
+                dataType: "json",
+                success: function (response) {
+                    k==0?$('#textright').val(response[0].translations[language].text):$('#lefttext').val(response[0].translations[language].text)
+                
+                }
+            });
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-black sticky-top ">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="https://s.aolcdn.com/hss/storage/midas/17f4b60aec299f212a456632b2311c5e/202565129/google-1200-2.jpg"
+                width="190px" height="80px" alt="Logo">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-1 mt-2 mt-lg-0">
+                <li class="nav-item active h4">
+                    翻譯 </li>
+
+            </ul>
+
+        </div>
+    </nav>
+    <div class="language">
+
+        <div class="row justify-content-around ">
+            <div class="col-4">
+                <button type="button" class="btn btn-light">中文</button>
+                <button type="button" class="btn btn-light">英文</button>
+                <button type="button" class="btn btn-light">韓文</button>
+
+            </div>
+
+
+
+            <div class="col-4">
+                <button type="button" class="btn btn-light">中文</button>
+                <button type="button" class="btn btn-light">英文</button>
+                <button type="button" class="btn btn-light">韓文</button>
+            </div>
+        </div>
+        <h1></h1>
+        <div class="textbox p">
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <textarea class="textleft form-control" name=""
+                        id="textleft" cols="70" rows="10" placeholder="請輸入要翻譯的文字"></textarea>
+                </div>
+                <div class="col-4">
+                    <textarea class="textright form-control "style="background-color: rgb(231, 231, 231)"  name="" id="textright" cols="70" rows="10"
+                        placeholder="請輸入要翻譯的文字"></textarea>
+                </div>
+
+            </div>
+            <h1></h1>
+            <div class="translate">
+                <div class="row">
+                    <div class="col-md-2 ml-md-auto">
+
+
+                        <button type="button" class="btn btn-info" id="leftbutton">翻譯</button>
+                    </div>
+                    <div class="col-md-2 ml-md-auto"><button type="button" class="btn btn-info"
+                            id="rightbutton">翻譯</button></div>
+                </div>
+            </div>
+
+</body>
+
+</html>
