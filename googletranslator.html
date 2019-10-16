@@ -14,22 +14,56 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
 
-        function screen() {
-            $('#leftbutton').click(function () {
-                var source = $('#textleft').val()
-                var language=$('#').val()
-                trans(source,language,0)
-            });
-            $('#rightbutton').click(function () {
-                var source = $('#textright').val()
-                var language=$('#').val()
-                translate(source,language,1)
+        let l_lang = ''
+        let r_lang = ''
+
+        $(document).ready(() => {
+            // $("#rightbtn").click();
+            // $("#leftbtn").click();
+            $("#transleftbutton").click(screenLeft);
+            $("#transrightbutton").click(screenRight);
+            $('.rightbtn').click(function () {
+                // console.log($(this).val());
+
+                r_lang = $(this).val()
+            })
+            $('.leftbtn').click(function () {
+                l_lang=$(this).val()
+            })
+        })
+        // $('.rightbtn').click(function() {
+        //     r_lang = this.val()
+        // })
+        // $("#transleftbutton").click(screenLeft);
+        // $("#transrightbutton").click(screenRight);
 
 
-        }
+        function screenLeft() {
+            var inputl = $('.textleft').val();
+            // var language1 = $('.rightbtn').val();
+
+            // console.log(r_lang);
+
+            var outputr = $('.textright')
+
+            trans1(outputr, inputl, r_lang)
+        };
 
 
-        function translate(source,language,k) {
+        function screenRight() {
+            var inputr = $('.textright').val();
+
+
+            // console.log(l_lang);
+
+            var outputl = $('.textleft')
+
+            trans2(outputl, inputr, l_lang)
+        };
+        //side 要更換的地方 MSG 要轉換的原文  要轉換的語言
+        function trans1(side, msg, lang) {
+            // console.log('run ajax');
+
             $.ajax({
                 type: "post",
                 headers: {
@@ -37,16 +71,49 @@
                     "Ocp-Apim-Subscription-Key": "236f9e3f86714f0191a5d83eb4378dfd",
                     "Content-Type": "application/json"
                 },
-                url: 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en&to=ja',
-                data: JSON.stringify([{ "Text": source }]), //要翻譯的文字
+
+                url: `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${lang}`,
+                data: JSON.stringify([{ "Text": msg }]), //要翻譯的文字
                 dataType: "json",
+
+                //上面如果成功回傳，執行下面func，response是ajax回傳的一整個東西
                 success: function (response) {
-                    k==0?$('#textright').val(response[0].translations[language].text):$('#lefttext').val(response[0].translations[language].text)
-                
+                    // console.log(response)
+                    let ans = response[0].translations[0].text //一整個東西裡面的順序取，看f12中即可看得
+                    side.val(ans)
+                    // k == 0 ? $('#textright').val(response[0].translations[language].text)
+                    //     : $('#lefttext').val(response[0].translations[language].text)
+
                 }
             });
         }
+            function trans2(side, msg, lang) {
+                // console.log('run ajax');
 
+                $.ajax({
+                    type: "post",
+                    headers: {
+
+                        "Ocp-Apim-Subscription-Key": "236f9e3f86714f0191a5d83eb4378dfd",
+                        "Content-Type": "application/json"
+                    },
+
+                    url: `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${lang}`,
+                    data: JSON.stringify([{ "Text": msg }]), //要翻譯的文字
+                    dataType: "json",
+
+                    //上面如果成功回傳，執行下面func，response是ajax回傳的一整個東西
+                    success: function (response) {
+                        // console.log(response)
+                        let ans = response[0].translations[0].text //一整個東西裡面的順序取，看f12中即可看得
+                        side.val(ans)
+                        // k == 0 ? $('#textright').val(response[0].translations[language].text)
+                        //     : $('#lefttext').val(response[0].translations[language].text)
+
+                    }
+                });
+            }
+        
     </script>
 
 </head>
@@ -76,30 +143,30 @@
 
         <div class="row justify-content-around ">
             <div class="col-4">
-                <button type="button" class="btn btn-light">中文</button>
-                <button type="button" class="btn btn-light">英文</button>
-                <button type="button" class="btn btn-light">韓文</button>
+                <button type="button" class="leftbtn btn btn-light" value="zh-Hant">中文</button>
+                <button type="button" class="leftbtn btn btn-light" value="en">英文</button>
+                <button type="button" class="leftbtn btn btn-light" value="ko">韓文</button>
 
             </div>
 
 
 
-            <div class="col-4">
-                <button type="button" class="btn btn-light">中文</button>
-                <button type="button" class="btn btn-light">英文</button>
-                <button type="button" class="btn btn-light">韓文</button>
+            <div class="col-4 ">
+                <button type="button" class="rightbtn btn btn-light" value="zh-Hant">中文</button>
+                <button type="button" class="rightbtn btn btn-light" value="en">英文</button>
+                <button type="button" class="rightbtn btn btn-light" value="ko">韓文</button>
             </div>
         </div>
         <h1></h1>
         <div class="textbox p">
             <div class="row justify-content-around">
                 <div class="col-4">
-                    <textarea class="textleft form-control" name=""
-                        id="textleft" cols="70" rows="10" placeholder="請輸入要翻譯的文字"></textarea>
+                    <textarea class="textleft form-control" name="" id="textleft" cols="70" rows="10"
+                        placeholder="請輸入要翻譯的文字"></textarea>
                 </div>
                 <div class="col-4">
-                    <textarea class="textright form-control "style="background-color: rgb(231, 231, 231)"  name="" id="textright" cols="70" rows="10"
-                        placeholder="請輸入要翻譯的文字"></textarea>
+                    <textarea class="textright form-control " style="background-color: rgb(231, 231, 231)" name=""
+                        id="textright" cols="70" rows="10" placeholder="請輸入要翻譯的文字"></textarea>
                 </div>
 
             </div>
@@ -109,13 +176,7 @@
                     <div class="col-md-2 ml-md-auto">
 
 
-                        <button type="button" class="btn btn-info" id="leftbutton">翻譯</button>
+                        <button type="button" class="btn btn-info" id="transleftbutton">---></button>
                     </div>
-                    <div class="col-md-2 ml-md-auto"><button type="button" class="btn btn-info"
-                            id="rightbutton">翻譯</button></div>
-                </div>
-            </div>
-
-</body>
-
-</html>
+                    <div class="col-md-2 ml-md-auto"><button type="button" class="btn btn-info" id="transrightbutton">
+                            <---</button> </div> </div> </div> </body> </html>

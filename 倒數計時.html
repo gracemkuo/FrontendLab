@@ -50,6 +50,7 @@
 
         $(document).ready(function () {
             $('#btnbtn').click(start);
+            // "start()"
             // $('#btnbtn').click(run);
             // $('#btnbtn').click(stop);
             //$("#btnbtn").click(stop);
@@ -80,9 +81,13 @@
             if(pause==false){
                 $('#label1').text(inputtime);
                 // await setTimeout(run(),1000);
-                setTimeout(function(){
-                run()
-                },1000)
+                // setTimeout(function(){
+                // run()
+                // },1000)
+                setTimeout(
+                run
+                ,1000)
+
             }
             if(inputtime==0){
                 alert("計時結束");

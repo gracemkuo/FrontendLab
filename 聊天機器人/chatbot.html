@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Chatbot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="chatbot.css">
+    <script>
+        $(document).ready(function () {
+            $('#btn').click(){
+        });
+
+        $('#TalkContainer').scrollTop($('#TalkContainer')[0].scrollHeight);
+
+        $('#btn').click(){
+            var input = $('#inputtext').val();
+            var output;
+            var output =
+                $.ajax({
+                    type: "post",
+                   headers: {
+                    "Authorization": "EndpointKey db9bcede-4456-4d3c-8fd7-3a2c0c326790"
+                "Content-Type": "application/json",
+                },
+                    url: "https://grace20191016.azurewebsites.net/qnamaker/knowledgebases/61c8596f-6442-4237-ab3b-9add14607332/generateAnswer",
+                    data: JSON.stringify({ "question": input}),
+                    dataType: "json",
+                    success: function (response) {
+                    
+                    }, error: function (err) {
+                        //如果有錯
+                    }
+
+        });
+
+        }
+
+
+
+
+
+
+    </script>
+
+
+
+
+</head>
+
+<body>
+    <div class="col-md-6 offset-md-3  ">
+        <!-- 中部主要聊天訊息 -->
+        <div class="ts attached secondary segment mt-5">
+            <!-- 對話氣泡 -->
+            <div id="talkarea" style="overflow: auto; height: 300px ">
+            </div>
+
+
+        </div>
+        <!-- 底部輸入欄位 -->
+        <div class="ts bottom attached segment">
+            <div class="ts grid">
+                <div class="stretched column">
+                    <div class="ts fluid input">
+                        <textarea id="inputtext" rows="5" placeholder="在此輸入文字⋯⋯"></textarea>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ts button" id="btn">送出</div>
+                </div>
+            </div>
+        </div>
+        <!-- / 底部輸入欄位 -->
+    </div>
+    <!-- / 左側欄位 -->
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+// function ButtonSend() {
+//             var html = $('#TalkContainer').html();
+//             var UserSay = $('#inputText').val();
+//             //clean
+//             $('#inputText').val('');
+//             //show user Says...
+//             $('#TalkContainer').html(html + '<br /><br />用戶 : ' + UserSay);
+//             //scroll to bottom
+//             $('#TalkContainer').scrollTop($('#TalkContainer')[0].scrollHeight);
+//             //取得答案...
+//             GetAnswer(UserSay, function (ret) {
+//                 //如果ok
+//                 //show user Says...
+//                 let html = $('#TalkContainer').html();
+//                 $('#TalkContainer').html(html + '<br /><br />客服 : ' + ret.answers[0].answer);
+//                 //scroll to bottom
+//                 $('#TalkContainer').scrollTop($('#TalkContainer')[0].scrollHeight);
+//             });
+//         }
+
+//         //取得答案，並執行whenSuccess
+//         //whenSuccess:傳入function作為參數
+//         function GetAnswer(msg, whenSuccess) {
+//             $.ajax({
+//                 type: "post",
+//                 headers: {
+//                     "Authorization": "EndpointKey 換成你的",
+//                     "Content-Type": "application/json"
+//                 },
+//                 url: "https://test20191016.azurewebsites.net/qnamaker/knowledgebases/7263fb2c-171d-4368-8bf8-b07f9764aa5e/generateAnswer",
+//                 data: JSON.stringify({ "question": msg }),
+//                 dataType: "json",
+//                 success: whenSuccess,
+//                 error: function (err) {
+//                     //如果有錯
+//                 }
+//             });
+//         }
+
+//         //doc ready
+//         $(document).ready(function () {
+//             $('#ButtonSend').click(ButtonSend);
+//             $('#inputText').keypress(function (e) {
+//                 if (e.keyCode == 13) {
+//                     ButtonSend();
+//                     return false;
+//                 }
+//             });
+//         });
