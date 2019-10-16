@@ -36,26 +36,26 @@
         }
 
         var second = 0;
-        var total = 0; 
+        var total = 0;
         var isPause = true;
         $('#btnstart').click(function btn_click(params) {
             btn_start()
         })
         function btn_start() {
             // isPause = false;
-            if(!isPause){
+            if (!isPause) {
                 // total = document.getElementById("input1").value
                 total = $('#input1').val()
-                if(total == 0){
-                isPause = true
-                return alert("計時結束!")
+                if (total == 0) {
+                    isPause = true
+                    return alert("計時結束!")
                 }
                 runclock(); //顯示
                 setTimeout(btn_start, 1000);  ///一直跑
             }
-            else{
+            else {
                 console.log('pasue');
-                if(total != document.getElementById("input1").value && total !=0) {return}
+                if (total != document.getElementById("input1").value && total != 0) { return }
                 isPause = false
                 total = document.getElementById("input1").value;
                 runclock(); //顯示
@@ -81,7 +81,7 @@
                 total--;
                 document.getElementById("label1").innerText = total; //顯示出來
                 // console.log(total);
-                
+
                 // if (total == -1) {
                 //     isPause = true;
                 //     alert("計時結束!")

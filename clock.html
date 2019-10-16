@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Clock</title>
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
         // 對Date的擴充套件，將 Date 轉化為指定格式的String
@@ -37,7 +37,7 @@
 
         function ButtonStart() {
             isPause = false;
-        
+
             Showclock();
         }
 
@@ -49,11 +49,12 @@
         var isPause = false;
 
 
-        function Showclock() {if (isPause == false) setTimeout(Showclock, 1000);
-        
+        function Showclock() {
+            if (isPause == false) setTimeout(Showclock, 1000);
+
             var dt = new Date();
             document.getElementById('label1').innerText = dt.Format("yyyy/MM/dd HH:mm:ss ");
-            
+
         }
 
 

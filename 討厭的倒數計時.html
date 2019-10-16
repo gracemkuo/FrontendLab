@@ -59,7 +59,7 @@
         var pause = true;
         var inputtime;
         function start(){
-            pause = !pause
+pause = !pause
             if(pause == false){
                 inputtime= $('#input1').val();
                 console.log('set input value to ');
@@ -80,7 +80,7 @@
             if(pause==false){
                 $('#label1').text(inputtime);
                 // await setTimeout(run(),1000);
-                setTimeout(function(){
+                setTimeout(()=>{
                 run()
                 },1000)
             }
@@ -192,7 +192,7 @@
         </div>
 
         <div class="buttongraoup ">
-            <input type="button" class="btn btn-info" id="btnbtn" value="開始/暫停">
+            <input type="button" class="btn btn-info" id="btnbtn" value="開始">
            
         </div>
         <label id="label1" style="font-family: Digifont; font-size: 50px">Timer</label>
