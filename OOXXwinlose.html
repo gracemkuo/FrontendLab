@@ -2,6 +2,9 @@
     <html lang="en">
 
     <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
         <title>OOXX-類別版, 判斷輸贏-</title>
         <style>
             td {
@@ -11,53 +14,59 @@
         </style>
 
         <script>
+
+
+
             class OOXX {
                 constructor() {
                     /* 初始化 */
                 }
-
                 setPoint(x, y, point) {
                     /* todo */
                     //設定落子
                 }
-
                 HasWinner() {
-                    /* 判斷勝利者 */
-
-                    return '';
+                   
+                   if (s1.text==s2.text==s3.text=="O"||s4.text==s5.text==s6.text||
+                   s7.text==s8.text==s9.text||s1.text==s4.text==s7.text||
+                   s2.text==s5.text==s8.text||s3.text==s6.text==s9.text||
+                   s7.text==s5.text==s3.text||s9.text==s5.text==s1.text)
+                    return ;
                 }
             }
 
             var flag = "";
             var game = new OOXX();
-
-            function SetPoint(obj) {
-                //alert(obj);
-                if (obj.innerText != "_") return;
-                if (flag == "X") {
-                    flag = "O";
-                    obj.innerText = 'O';
-                }
-                else {
-                    flag = "X";
-                    obj.innerText = 'X';
-                }
-                //show
-                var label = document.getElementById('lebel1');
-                //顯示位置
-                label.innerHTML = "結果:" + "rowIndex: " + obj.parentElement.rowIndex + " CellIndex: " + obj.cellIndex + " --> " + obj.innerText;
-                
-                HasWinner()
-                //設定落子
-                //game.setPoint(obj.parentElement.rowIndex, obj.cellIndex, obj.innerText);
-                //有人贏嗎?
-                //if (game.HasWinner() != '') label.innerHTML = `<span style='color:red'>winner : ${game.HasWinner()}</span>`;
-            }
-
             function HasWinner() {
                 if (game.HasWinner() != '') {
                     label.innerHTML = `<span style='color:red'>winner : ${game.HasWinner()}</span>`;
                 }
+
+
+                function SetPoint(obj) {
+                    //alert(obj);
+                    if (obj.innerText != "_") return;
+                    if (flag == "X") {
+                        flag = "O";
+                        obj.innerText = 'O';
+                    }
+                    else {
+                        flag = "X";
+                        obj.innerText = 'X';
+                    }
+                    //show
+                    var label = document.getElementById('lebel1');
+                    //顯示位置
+                    label.innerHTML = "結果:" + "rowIndex: " + obj.parentElement.rowIndex + " CellIndex: " + obj.cellIndex + " --> " + obj.innerText;
+
+
+                    //設定落子
+                    game.setPoint(obj.parentElement.rowIndex, obj.cellIndex, obj.innerText);
+                    //有人贏嗎?
+                    if (game.HasWinner() != '') label.innerHTML = `<span style='color:red'>winner : ${game.HasWinner()}</span>`;
+                }
+
+
         </script>
     </head>
 
@@ -67,19 +76,19 @@
             <label id=lebel1 h3>結果:</label>
             <table border="1" style="width: 600px; height:400px">
                 <tr>
-                    <td onclick="SetPoint(this);">_</td>
-                    <td onclick="SetPoint(this);">_</td>
-                    <td onclick="SetPoint(this);">_</td>
+                    <td id="s1" onclick="SetPoint(this);">_</td>
+                    <td id="s2" onclick="SetPoint(this);">_</td>
+                    <td id="s3" onclick="SetPoint(this);">_</td>
                 </tr>
                 <tr>
-                    <td onclick="SetPoint(this);">_</td>
-                    <td onclick="SetPoint(this);">_</td>
-                    <td onclick="SetPoint(this);">_</td>
+                    <td id="s4" onclick="SetPoint(this);">_</td>
+                    <td id="s5" onclick="SetPoint(this);">_</td>
+                    <td id="s6" onclick="SetPoint(this);">_</td>
                 </tr>
                 <tr>
-                    <td onclick="SetPoint(this);">_</td>
-                    <td onclick="SetPoint(this);">_</td>
-                    <td onclick="SetPoint(this);">_</td>
+                    <td id="s7" onclick="SetPoint(this);">_</td>
+                    <td id="s8" onclick="SetPoint(this);">_</td>
+                    <td id="s9" onclick="SetPoint(this);">_</td>
                 </tr>
             </table>
         </div>

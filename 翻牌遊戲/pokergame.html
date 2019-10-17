@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>pokergame</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- bootstrap 4.3.1 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+        img {
+            border: 10px solid transparent !important;
+            height: 200px;
+            width: 120px;
+            border-radius: 10%;
+        }
+
+        span {
+            text-align: center;
+            font-size: 60px;
+            font-family: Microsoft JhengHei;
+            color: black;
+        }
+
+        .imgs {
+            border-radius: 10%;
+            border: 10px solid black !important;
+            box-sizing: border-box;
+            box-shadow: black;
+        }
+
+        .clear {
+            border-radius: 10%;
+            transition: all 1.5s;
+        }
+
+        .container {
+            background-image: url('bg.jpg');
+        }
+        #result{
+            font-size: 30px;
+        }
+    </style>
+
+    <script>
+        var p1 = { a: '17-1.jpg', i: '風，前進、充實、期待的暗示' }
+        var p2 = { a: '17-2.jpg', i: '花，成果、報酬、目標達標率很高' }
+        var p3 = { a: '17-3.jpg', i: '浮，由束縛中解放、自由' }
+        var p4 = { a: '17-4.jpg', i: '歌，歡喜、調和、治療的力量' }
+        var p5 = { a: '17-5.jpg', i: '双，最佳搭擋的出現' }
+        var p6 = { a: '17-6.jpg', i: '火，強烈的信條信念，突破難關' }
+        var p7 = { a: '17-7.jpg', i: '錠，智能、英知。對真實、內心的察覺' }
+        var p8 = { a: '17-8.jpg', i: '戻，敗者復活，永不放棄' }
+
+        var picnumber = [p1, p2, p3, p4, p5, p6, p7, p8]; //牌種
+        var Cards = []; //16個牌位
+        var Card;
+        var current = 0;  //當前選擇的那個牌(在陣列中的index)
+        var times = 0; //剩餘幾步
+
+
+        function SetupRandomCards() {
+            for (i = 0; i < Cards.length; i++) {
+                var url = picnumber[Math.floor(Math.random() * picnumber.length)];
+                Cards[i].src = url.a;
+                Cards[i].data = url.i;
+            }
+        }
+
+        function ButtonStart() {
+            $('img').prop('src', '17back.jpg');
+            times = 20;
+            Cards[current].className = "imgs";
+            start();
+        }
+
+        function start() {
+            Cards[current].className = "clear";
+            current++;
+            if (current > Cards.length - 1) {
+                current = 0;
+            }
+            Cards[current].className = "imgs";
+            console.log(times)
+            if (times > 0) {
+                times--;
+                if (times == 2) SetupRandomCards();
+                setTimeout(start, 200);
+            } else {
+
+                $('#result').html(Cards[current].data)
+            }
+        }
+
+        //init
+        $(document).ready(function () {
+            //先hook事件
+            $('#ButtonStart').click(ButtonStart);
+            //把頁面上所有Cards放入陣列  把每個圖片放進陣列
+            for (var i = 1; i <= 16; i++) {
+                Card = document.getElementById("i" + i); //以id取得物件
+                //判斷card TF是看有沒有取到
+                if (Card) {
+                    Cards.push(Card);
+                }
+            }
+            console.log(Cards);
+
+            //Math.random() 取 0~1之間的亂數
+            //Math.floor() 取最大整數
+            //決定從哪個地方開始跑
+            current = Math.floor(Math.random() * Cards.length); //取到陣列的第n個
+        });
+
+        // function getRandom(x) {
+        //     return Math.floor(Math.random() * x) + 1;
+        // };
+
+    </script>
+</head>
+
+<body>
+    <div class="container ">
+        <div class="row mt-1 text-center">
+            <div class="col-2">
+                <img src='17back.jpg' id="i1" alt='' data="" />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i2" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i3" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i4" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i5" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i6" alt='' />
+            </div>
+        </div>
+        <div class="row mt-3 text-center">
+            <div class="col-2">
+                <img src='17back.jpg' id="i16" alt='' />
+            </div>
+            <div class=" col-8">
+                <span style="font-size: 30px" mt-5>「隱藏著黑暗力量的鑰匙啊，在我面前顯示你真正的力量！
+                    現在以你的主人小櫻之名命令－封印解除！」</span><br />
+
+                <button type="button" name="" id="ButtonStart" class="btn btn-light btn-lg btn-block">
+                    解除封印!
+                </button>
+                <span id="result"></span>
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i7" alt='' />
+            </div>
+        </div>
+        <div class="row mt-1 text-center">
+            <div class="col-2">
+                <img src='17back.jpg' id="i15" alt='' />
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i8" alt='' />
+            </div>
+        </div>
+        <div class="row mt-1 text-center">
+            <div class="col-2">
+                <img src='17back.jpg' id="i14" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i13" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i12" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i11" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i10" alt='' />
+            </div>
+            <div class="col-2">
+                <img src='17back.jpg' id="i9" alt='' />
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
