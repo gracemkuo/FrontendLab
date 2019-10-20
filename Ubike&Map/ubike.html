@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container-all {
+            min-height: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        .left {
+            float: left;
+            flex: 1;
+            width: 15%;
+        }
+
+        .right {
+            float: right;
+            flex-grow: 4;
+            flex-basis: 0%;
+            width: 85%;
+        }
+
+        .nav-container {
+            margin-top: 10px;
+            box-shadow: 0 2px 2px 2px black;
+            transition: all 0.3s linear;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+        }
+
+        li {
+            position: relative;
+            margin: 5px;
+            background: linear-gradient(orange, rgb(248, 143, 6));
+            text-align: center;
+        }
+
+        li:hover {
+            cursor: pointer;
+        }
+
+        .white {
+            color: white;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-all">
+        <div class="nav-container left">
+           
+            <ul class="white">
+                    <img src="bike.jpg" style="display:block; margin:auto;" alt=""><br/>
+                    <li class="list-group-item  area">顯示全區</li>
+                    <li class="list-group-item  area">信義區</li>
+                    <li class="list-group-item  area">大安區</li>
+                    <li class="list-group-item  area">大同區</li>
+                    <li class="list-group-item  area">士林區</li>
+                    <li class="list-group-item  area">內湖區</li>
+                    <li class="list-group-item  area">北投區</li>
+                    <li class="list-group-item  area">中山區</li>
+                    <li class="list-group-item  area">松山區</li>
+                    <li class="list-group-item  area">南港區</li>
+                    <li class="list-group-item  area">中正區</li>
+                    <li class="list-group-item  area">萬華區</li>
+                    <li class="list-group-item  area">文山區</li>
+                  </ul>
+        </div>
+
+
+        <div id="map" class="right"></div>
+    </div>
+
+    <script>
+
+        var map;
+        var features;
+        function initMap() {
+            var myLatLng = { lat: 25.0420753, lng: 121.5361051 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: myLatLng
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: '媽!我在這!'
+            });
+            //設定icon的集合
+            var icons = {
+                ubike: {
+                    icon: 'bike.png'
+                },
+                bluebike: {
+                    icon: 'bike_blue.png'
+                },
+                no: {
+                    icon: 'no.png'
+                }
+            };
+            var features = GetUbikeLocation();
+            // Create markers.將設定好的位址和icon顯示在地圖上
+            for (var i = 0; i < features.length; i++) {
+                //按照古哥地圖文件給德格式顯示
+                var marker = new google.maps.Marker({
+                    //讀取feature的位置資訊
+                    position: features[i].position,
+                    //讀取icon的位置資訊
+                    icon: icons[features[i].type].icon,
+                    //顯示剛設定的資料在地圖上
+                    map: map,
+                    title: features[i].title
+                });
+            };
+        }
+        //取得ubike位置(經緯度)
+        function GetUbikeLocation() {
+            //    [{position: new google.maps.LatLng(25.0420753, 121.5361051),
+            //         type: 'ubike'
+            //    }]
+            var data = [];
+            //呼叫opendata
+            var Opendata = GetOpenData();
+            console.log('Opendata is', Opendata);
+            //顯示每一個item的值
+            $.each(Opendata.retVal, function (i, item) {
+                // console.log('i is ', i);
+                // console.log('item is', item);
+                var singleItem = {
+                    position: new google.maps.LatLng(item.lat, item.lng),
+                    type: 'ubike',
+                    title: item.sna + ':' + item.sbi + '/' + item.tot,
+                };
+                if (item.sbi < 10) {
+                    singleItem.type = 'bluebike';
+                };
+                if (item.sbi == 0) {
+                    singleItem.type = 'no';
+                };
+
+                //將資料加入collection
+                data.push(singleItem);
+
+            });
+            return data;
+        }
+        //取得opendata
+        function GetOpenData() {
+            var ubikelocation;
+            $.ajax({
+                type: 'Get',
+                url: 'https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json',
+                success: function (data) {
+                    ubikelocation = data;
+                    // console.log('data is', data);
+                },
+                error: function () {
+                    alert('fail');
+                },
+                async: false, //讓方法同步
+            });
+
+            return ubikelocation;
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb-J9tT8zHLL51Dvla7Xxrn2ltzoeuLWw&callback=initMap"
+        async defer></script>
+</body>
+
+</html>

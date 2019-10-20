@@ -14,8 +14,8 @@
         </style>
 
         <script>
-
-
+[
+            // var array = [[],[],[]]
 
             class OOXX {
                 constructor() {
@@ -26,12 +26,12 @@
                     //設定落子
                 }
                 HasWinner() {
-                   
-                   if (s1.text==s2.text==s3.text=="O"||s4.text==s5.text==s6.text||
-                   s7.text==s8.text==s9.text||s1.text==s4.text==s7.text||
-                   s2.text==s5.text==s8.text||s3.text==s6.text==s9.text||
-                   s7.text==s5.text==s3.text||s9.text==s5.text==s1.text)
-                    return ;
+                    if(s1.text == s2.text && s1.text == s3.text){
+                        return s1.text
+                    }
+                    
+
+                        return;
                 }
             }
 

@@ -1,69 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <style id="stndz-style"></style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
+<html>
+  <head>
+    <title>Custom Markers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
     <script>
-        $(document).ready(function () {
-            init();
-        });
+      var map;
+      function initMap() {
 
-        function init() {
-            $('#ButtonStart').click(StartTime);
-            $('#ButtonStart').click(GetTime);
-            $('#ButtonPause').click(StopTime);
-        }
+        var icons = {
+          ubike: {
+            icon:'bike.png'
+          }
+        };
 
-        function StartTime() {
-            isPause = false;
-        }
+        var features = [
+          {
+            position: new google.maps.LatLng(-33.91721, 151.22630),
+            type: 'ubike'
+          }];
 
-        function GetTime() {
-            var t = $('#myTextarea').val();
-            if (t == 0) {
-                alert('時間到');
-                return;
-            }
+        // Create markers.
+        for (var i = 0; i < features.length; i++) {
+          var marker = new google.maps.Marker({
+            position: features[i].position,
+            icon: icons[features[i].type].icon,
+            map: map
+          });
+        };
 
-            else if (isPause == false) {
-                t = t - 1;
-                $('#myTextarea').val(t);
-                setTimeout(GetTime, 1000);
-            }
-        }
 
-        function StopTime() {
-            isPause = true;
-        }
+        
+      }
     </script>
-    <style data-styled="" data-styled-version="4.2.0"></style>
-    <style data-styled="" data-styled-version="4.2.0"></style>
-    <style data-styled="" data-styled-version="4.2.0"></style>
-</head>
-
-
-        <body>
-
-                <div class="row" style="margin: 10px">
-                    <div class="col-6">
-                        <input id="myTextarea" class="form-control" style="width: 180px">
-                        <div><button type="button" class="btn btn-outline-info" id="ButtonStart">開始</button>
-                            <button type="button" class="btn btn-outline-secondary" id="ButtonPause">暫停</button></div>
-                    </div>
-                </div>
-            
-            
-            
-            </body>
-
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+  </body>
 </html>
