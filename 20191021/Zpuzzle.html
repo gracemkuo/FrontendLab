@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zpuzzle</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        td {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        img {
+            height: 150px;
+            width: 150px;
+        }
+
+        .clear {
+            height: 150px;
+            width: 150px;
+            background-color: white;
+        }
+    </style>
+    <script>
+
+        //  var pic = [s1, s2, s3, s4, s5, s6, s7, s8,s9]; //九張圖編號
+        var PuzzlesF = ["p1.JPG", "p2.JPG", "p3.JPG", "p4.JPG", "p5.JPG", "p6.JPG", "p7.JPG", "p8.JPG", "p9.JPG"]; //所有9個牌位
+        var PuzzlesL = ["p1.JPG", "p2.JPG", "p3.JPG", "p4.JPG", "p5.JPG", "p6.JPG", "p7.JPG", "p8.JPG", "p9.JPG"]; //所有9個牌位
+        var Puzzle;
+        var HidePic;
+
+
+
+        $(document).ready(function () {
+            $('.btnstart').click(ButtonStart);
+            $('td').click(Checkerror);
+
+        });
+
+        function ButtonStart() {
+            SetupRandomPuzzle();
+            //隨機有一個圖片消失作為開始，陣列隨機選一個
+            HidePic = Math.floor(Math.random() * PuzzlesL.length);
+            console.log(HidePic);
+            var invisible = PuzzlesL[HidePic];
+            PuzzlesL[HidePic] = "";
+            for (let i = 0; i < PuzzlesL.length; i++) {
+                $(`#s${i} img`).attr('src', PuzzlesL[i]); //SRC的路徑等於puzzle i
+
+            }
+        }
+        function SetupRandomPuzzle() {
+            PuzzlesL.sort(randomsort);
+        }
+        function randomsort(a, b) {
+            return Math.random() > .5 ? -1 : 1;
+            //用Math.random()函式生成0~1之間的隨機數與0.5比較，返回-1或1
+        }
+
+        function Checkerror() {
+            var pick = $(this).attr('id').replace('s', '');
+            console.log(HidePic);
+            if (Math.abs(pick - HidePic) == 1 || Math.abs(pick - HidePic) == 3) {
+                $(`#s${pick} img`).attr('src', "");
+                $(`#s${HidePic} img`).attr('src', PuzzlesL[pick]);
+                PuzzlesL[HidePic] = PuzzlesL[pick];
+                PuzzlesL[pick] = "";
+                HidePic = pick
+            }
+            let flag = true
+            for (let k = 0; k < PuzzlesF.length; k++) {
+
+                if (PuzzlesL[k] != PuzzlesF[k] && k != HidePic) {
+                    flag = false
+                    break
+                }
+
+            }
+            if (flag) {
+                alert("拼圖完成!")
+                $(`#s${HidePic} img`).attr('src', PuzzlesF[pick]);
+            };
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="countainer">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h3>Louise Lake Zpuzzle</h3>
+                <label id=lebel1 h3>點選圖片將拼圖拼回原狀</label>
+                <table style="width: 450px; height:450px">
+                    <tr>
+                        <td id="s0"><img src="p1.JPG" alt="" /></td>
+                        <td id="s1"><img src="p2.JPG" alt="" /></td>
+                        <td id="s2"><img src="p3.JPG" alt="" /></td>
+                    </tr>
+                    <tr>
+                        <td id="s3"><img src="p4.JPG" alt="" /></td>
+                        <td id="s4"><img src="p5.JPG" alt="" /></td>
+                        <td id="s5"><img src="p6.JPG" alt="" /></td>
+                    </tr>
+                    <tr>
+                        <td id="s6"><img src="p7.JPG" alt="" /></td>
+                        <td id="s7"><img src="p8.JPG" alt="" /></td>
+                        <td id="s8"><img src="p9.JPG" alt="" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-3 offset-md-3 mt-3">
+                <button type="button" class="btnstart btn btn-info">開始</button>
+            </div>
+        </div>
+</body>
+
+</html>
