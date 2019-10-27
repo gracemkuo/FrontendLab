@@ -34,43 +34,80 @@
     crossorigin="anonymous"></script>
 
   <script>
-    $$(document).ready(function () {
+    $(document).ready(function () {
       $('#start').click(GameStart);
       $('#restart').click(GameClean);
-      $('#cheat').click(ShowAns);
-      $('#userGuess').keyup(Enter);
-      $('#guess').click(GuessNumber);
+      $('#cheat').click(CheatAns);
+      $('#userGuess').keyup(EnterKey);
+      $('#guess').click(GuessNum);
     });
-   
-
+    var FirstArray = [];
     function GameStart() {
-      var FirstArray = [...Array(4).keys()]; //長度4的陣列
-      for (i = 0; i < FirstArray.length; i++) {
-                var RandomNum = Math.floor(Math.random() *9);
-                FirstArray[i] = RandomNum;
-            }
+
+      for (var i = 0; i < 10; i++) {//一個從0到100的陣列s
+        FirstArray.push(i);
+      }
+      FirstArray.sort(function () {//隨機打亂這個陣列
+        return Math.random() - 0.5;
+      })
+      FirstArray.length = 4;//改寫長度
+      console.log(FirstArray);
     }
     function GameClean() {
-
+      FirstArray = [];
     }
-    function ShowAns() {
-      alert("齁不要偷看答案啦",FirstArray.)
+    function CheatAns() {
+      alert('齁不要看答案啦!，答案是:' + FirstArray.join(''));
     }
 
-
-    function GuessNumber() {
-
-    }
-    function Enter() {
+    function EnterKey() {
       var x = event.keyCode;
-      if (x == 13) {  // 27 is the ESC key
-        GuessNumber();
+      if (x == 13) {
+        GuessNum();
       }
     }
+   
+    var A = 0;
+    var B = 0;
+    function GuessNum() {
+      
+      var InputNum = $('#userGuess').val();
+      console.log(InputNum);
+      GuessNum = InputNum.split('');//將輸入的數字轉成陣列
+      if (GuessNum.length != 4) {
+        return alert('請輸入長度為四的數字')
+      }
+      for (let i = 0; i < 4; i++) {
+        if (GuessNum[i] == GuessNum[i + 1]) {
+          return alert('請輸入四個不重複的數字');
+        }
 
-
+      }
+      for (let i = 0; i < FirstArray.length; i++) {
+        if (FirstArray.includes(GuessNum[i])) {
+          B++;
+        } else if (GuessNum[i] == FirstArray[i]) {
+          B--;
+          A++;
+        }
+      }
+      display =`
+        <li class="list-group-item">
+          <span class="label label-danger">${A}A${B}B</span>
+          <!--<span class="badge">0A1B</span>-->
+          ${InputNum}
+        </li>
+        `
+      $('#guessResults').append(display)
+      if (A == 4) {
+        alert('恭喜答對')
+      }
+    }
+   
 
   </script>
+
+
 </head>
 
 <body>
@@ -134,21 +171,7 @@
               </div>
               <br>
               <ul id="guessResults" class="list-group">
-                <li class="list-group-item">
-                  <span class="label label-danger">2A0B</span>
-                  <!--<span class="badge">2A0B</span>-->
-                  6089
-                </li>
-                <li class="list-group-item">
-                  <span class="label label-danger">3A0B</span>
-                  <!--<span class="badge">3A0B</span>-->
-                  6345
-                </li>
-                <li class="list-group-item">
-                  <span class="label label-success">4A0B</span>
-                  <!--<span class="badge badge-success">4A0B</span>-->
-                  6385
-                </li>
+                
               </ul>
               <div class="input-group">
                 <span class="input-group-addon" id="sizing-addon1">猜答案</span>
@@ -169,7 +192,6 @@
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
-  <script src="scripts/bootstrap.min.js"></script>
   <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
   <!--<script src="../../assets/js/vendor/holder.min.js"></script>-->
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
