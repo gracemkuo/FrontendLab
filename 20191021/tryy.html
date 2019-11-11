@@ -1,0 +1,129 @@
+
+    <script>
+            var Calendar = [];
+            var d = new Date();
+            var _year = d.getFullYear();
+            var _month = d.getMonth();
+            var _date = d.getDate();
+            var _week = d.getDay();
+    
+            $(function () {
+    
+    
+                DisplayCalendar();
+    
+                $('#next-month').on('click', function () {
+                    console.log('give next-month click');
+                    if (_month < 11) {
+                        _month += 1;
+                    } else {
+                        _month = 0;
+                        _year += 1;
+                    }
+                    DisplayCalendar();
+                });
+    
+                $('#last-month').on('click', function () {
+                    console.log('give last-month click');
+                    if (_month > 1) {
+                        _month -= 1;
+                    } else {
+                        _month = 11;
+                        _year -= 1;
+                    }
+                    DisplayCalendar();
+                });
+    
+            })
+    
+            function DisplayCalendar() {
+    
+                //先將顯示畫面的清空 , 呈現資料的陣列清空
+                $('#calendar-content').empty();
+                Calendar = [];
+                //顯示月份
+                $('#month').text(GetMonthName(_month));
+    
+                var firstDay = new Date(_year, _month, 1);
+                var lastDay = new Date(_year, _month + 1, 0);
+                var lastDateOfLastMonth = new Date(_year, _month, 0);
+    
+                //取得上個月日期(上月要顯示幾天 , 上個月最後一天)
+                GetLastMonthDate(firstDay.getDay() - 1, lastDateOfLastMonth); //想一下firstDay.getDay()為甚麼要減一
+    
+                //顯示本月幾天　傳入(第一天，最後一天)
+                GetCurrentMonthDate(firstDay, lastDay);
+    
+                //顯示下個月日期
+                GetNextMonthDate(lastDay);
+                console.log('Calendar is ', Calendar);
+    
+                console.log('Do DisplayCalendar');
+    
+                var rows_count = Calendar.length / 7;
+                //產生tr
+                for (var i = 0; i < rows_count; i++) {
+                    $('#calendar-content').append($('<tr>').addClass('week' + i));
+                }
+    
+                //產生td 在tr裡面
+                for (var i = 0; i < Calendar.length; i++) {
+                    var week = parseInt(i / 7);
+                    var target = $('#calendar-content').find('.week' + week);
+                    target.append($('<td>').text(Calendar[i].date).addClass('date' + i));
+                }
+            }
+    
+            function GetLastMonthDate(lastMonthDateRange, lastDateOfLastMonth) {
+                var displaydate = lastDateOfLastMonth.getDate() - lastMonthDateRange;
+                var displayWeek = lastDateOfLastMonth.getDay() - lastMonthDateRange;
+                //依照順序顯示上個月日期
+                for (var i = 0; i <= lastMonthDateRange; i++) {
+    
+                    var singleItem = {
+                        "month": lastDateOfLastMonth.getMonth(),
+                        "date": displaydate,
+                        "week": displayWeek
+                    }
+                    displaydate++;
+                    displayWeek++;
+                    Calendar.push(singleItem);
+                }
+            }
+    
+            function GetCurrentMonthDate(firstDay, lastDay) {
+                var start = firstDay.getDate();
+                var end = lastDay.getDate();
+                for (var i = start; i <= end; i++) {
+                    var today_week = new Date(_year, _month, i);
+                    var singleItem = {
+                        "month": today_week.getMonth(),
+                        "date": i,
+                        "week": today_week.getDay()
+                    }
+                    Calendar.push(singleItem);
+                }
+            }
+    
+            function GetNextMonthDate(lastDayOfThisMonth) {
+                var lastDateOfthisMonth_week = lastDayOfThisMonth.getDay();
+                var nextMonthFirstDate = new Date(_year, _month + 1, 1); //取得下個月第一天
+                for (var i = 0; i < 6 - lastDateOfthisMonth_week; i++) {
+                    var singleItem = {
+                        "month": nextMonthFirstDate.getMonth(),
+                        "date": nextMonthFirstDate.getDate() + i,
+                        "week": nextMonthFirstDate.getDay() + i
+                    }
+    
+                    Calendar.push(singleItem);
+                }
+            }
+    
+            //取得月份名稱
+            function GetMonthName(_month) {
+                var MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                    'October', 'Novenber', 'December'
+                ];
+                return MonthArray[_month];
+            }
+        </script>

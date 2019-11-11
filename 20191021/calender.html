@@ -1,6 +1,5 @@
-
 <!doctype html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <title>Title</title>
@@ -11,12 +10,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--字型-->
-    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            font-family: 'Noto Serif TC', serif;
+        html,
+        body,
+        header,
+        .view {
+            height: 100%;
+            font-family: 'Great Vibes', cursive;
         }
 
         #calendar {
@@ -24,166 +26,142 @@
             width: 1080px;
         }
 
-        #title_month {
-            font-size: 25px;
+        #titlemonth {
+
+            font-size: 60px;
+
         }
 
-        .container {
-            margin-bottom: 30px;
+        .text-center {
+            font-size: 40px;
+            margin-top: 10px;
+        }
+
+        /* .container {
+         
+
+        } */
+
+        .date>div {
+            width: 120px;
+            color: black;
+            height: 15px;
+            font-size: 10px;
+            margin-left: 10px;
+
         }
 
         td {
             vertical-align: top;
-            width: 155px;
-            height: 150px;
+            width: 120px;
+            height: 80px;
+            color: black;
+            font-size: 30px;
+
         }
 
-        td:hover {
-            background-color: skyblue;
+        .calendar-content>tr {
+
+            border: 20px white
+        }
+
+        #right_month {
+            font-size: 40px;
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+
+        }
+
+        #left_month {
+            font-size: 40px;
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #titleyear {
+            font-size: 40px;
+
         }
     </style>
+
 </head>
 
 <body>
+    <div class="view"
+        style="background-image: url('https://images.unsplash.com/photo-1558346648-9757f2fa4474?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
 
-    <div class="container">
-        <input id="addlist_Window" class="btn btn-link" type="button" value="+">
-        <div class="text-center row">
-            <div class="col-4">
-                <input id="left_month" class="btn btn-link addData" type="button" value="<">
+
+
+        <div class="container">
+            <div class="text-center row">
+                <div class="col-4">
+
+                </div>
+                <div id="titleyear" class="col-4">2019</div>
+                <div class="col-4">
+                </div>
             </div>
-            <div id="title_month" class="col-4"></div>
-            <div class="col-4">
-                <input id="right_month" class="btn btn-link addData" type="button" value=">">
-            </div>
-        </div>
-    </div>
+            <div class="text-center row">
 
-    <table id="calendar" class="table-striped">
-        <thead id="thead">
-            <tr>
-                <th>
-                    <p class="text-center">日</p>
-                </th>
-                <th>
-                    <p class="text-center">一</p>
-                </th>
-                <th>
-                    <p class="text-center">二</p>
-                </th>
-                <th>
-                    <p class="text-center">三</p>
-                </th>
-                <th>
-                    <p class="text-center">四</p>
-                </th>
-                <th>
-                    <p class="text-center">五</p>
-                </th>
-                <th>
-                    <p class="text-center">六</p>
-                </th>
-            </tr>
-        </thead>
-        <tbody id="calendar-content">
-        </tbody>
-    </table>
-
-    <!--Modal-->
-    <div id="AddList" class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">新增行事曆</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="col-4">
+                    <input id="left_month" class="btn btn-link addData" type="button" value="Previous">
                 </div>
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-2">年份:</div>
-                        <select id="list_Years" class="form-control col-2">
-                            <option value="2019">2019</option>
-                        </select>
-                        <div class="col-2">月份:</div>
-                        <select id="list_Months" class="form-control col-2">
-                        </select>
-                        <div class="col-2">日期:</div>
-                        <select id="list_Days" class="form-control col-2">
-                        </select>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-12">
-                            <label for="comment">代辦事項</label>
-                            <textarea class="form-control" rows="2" id="content"></textarea>
-                        </div>
-                    </div>
-                </div>
+                <div id="titlemonth" class="col-4"></div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button id="btn_Add" type="button" class="btn btn-danger" data-dismiss="modal">新增</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">關閉</button>
+
+                <div class="col-4">
+                    <input id="right_month" class="btn btn-link addData" type="button" value="Next">
                 </div>
 
             </div>
         </div>
+
+        <table id="calendar" style="border:3px white solid">
+            <thead id="thead">
+                <tr>
+                    <th>
+                        <p class="text-center">Sun</p>
+                    </th>
+                    <th>
+                        <p class="text-center">Mon</p>
+                    </th>
+                    <th>
+                        <p class="text-center">Tue</p>
+                    </th>
+                    <th>
+                        <p class="text-center">Wed</p>
+                    </th>
+                    <th>
+                        <p class="text-center">Thr</p>
+                    </th>
+                    <th>
+                        <p class="text-center">Fri</p>
+                    </th>
+                    <th>
+                        <p class="text-center">Sat</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="calendar-content">
+            </tbody>
+        </table>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+            </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+            </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+            </script>
+
     </div>
-
-    <!--Modal-->
-    <div id="AddEdit" class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">變更行事曆</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-2">年份:</div>
-                        <label id="label_year">2019</label>
-                        <div class="col-2">月份:</div>
-                        <label id="label_month"></label>
-                        <div class="col-2">日期:</div>
-                        <label id="label_date"></label>
-
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-12">
-                            <label for="comment">代辦事項</label>
-                            <textarea class="form-control" rows="2" id="Edit_content"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button id="btn_Storage" type="button" class="btn btn-danger" data-dismiss="modal">修改</button>
-                    <button id="btn_Delete" type="button" class="btn btn-danger" data-dismiss="modal">刪除</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-
     <script>
         var Calendar = [];
         var DataArr = [];
@@ -204,7 +182,7 @@
             DataArr = JSON.parse(localStorage.getItem('data'))
 
             //產生月份
-            $('#title_month').text(GetMonthName(_month)).attr('value', _month);
+            $('#titlemonth').text(GetMonthName(_month)).attr('value', _month);
 
             //取得這個第一天
             var firstDay = new Date(_year, _month, 1);
@@ -348,7 +326,7 @@
             $('#list_Days').empty();
 
             for (let i = 0; i < list_lastDay; i++) {
-                $('#list_Days').append(` <option value="${i+1}">${i+1}</option>`);
+                $('#list_Days').append(` <option value="${i + 1}">${i + 1}</option>`);
             }
         }
 
@@ -393,7 +371,7 @@
         function List_Delete() {
             let this_day = parseInt($('#label_date').html());
             let this_month = parseInt($('#title_month').attr('value'));
-            console.log('xxx',this_month,this_day);
+            console.log('xxx', this_month, this_day);
             $.each(DataArr, (i, item) => {
                 //console.log('yyy', item.month, item.date);
                 if (new Date(2019, item.month, item.date) - new Date(2019, this_month, this_day) == 0) {
@@ -464,7 +442,7 @@
 
             //新增modal月份選項
             for (let i = 0; i < 12; i++) {
-                $('#list_Months').append(` <option value="${i}">${i+1}</option>`);
+                $('#list_Months').append(` <option value="${i}">${i + 1}</option>`);
             }
 
         });
