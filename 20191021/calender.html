@@ -26,6 +26,26 @@
             width: 1080px;
         }
 
+        #right_month {
+            font-size: 40px;
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+
+        }
+
+        #left_month {
+            font-size: 40px;
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #titleyear {
+            font-size: 40px;
+
+        }
+
         #titlemonth {
 
             font-size: 60px;
@@ -65,32 +85,22 @@
             border: 20px white
         }
 
-        #right_month {
-            font-size: 40px;
-            color: white;
-            text-align: center;
-            margin-top: 10px;
-
+        /* table {
+            border-collapse: collapse;
         }
 
-        #left_month {
-            font-size: 40px;
-            color: white;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        #titleyear {
-            font-size: 40px;
-
-        }
+        table,
+        th,
+        td {
+            border: 3px solid white;
+        } */
     </style>
 
 </head>
 
 <body>
-    <div class="view"
-        style="background-image: url('https://images.unsplash.com/photo-1558346648-9757f2fa4474?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="view" style="background-image: url('https://images.unsplash.com/photo-1558346648-9757f2fa4474?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'); 
+        background-repeat: no-repeat; background-size: cover; background-position: center center;">
 
 
 
@@ -149,6 +159,43 @@
             </tbody>
         </table>
 
+        <div class="row">
+            <div class="col-md-3 ml-md-auto mt-3">
+                <button type="button" class="btn btn-dark ">Add New Event</button>
+            </div>
+        </div>
+        <!-- The Modal -->
+        <div class="modal fade" id="ModalAddNew">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Event</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form>
+                            <label>Year</label>
+                            <input id="field_Year" type="datetime" class="form-control" />
+                            <label>Month</label>
+                            <input id="field_Month" type="text" class="form-control" />
+
+                            <label>Day</label>
+                            <input id="field_Day" type="tel" class="form-control" />
+                            <label>Event</label>
+                            <input id="field_Event" type="email" class="form-control" />
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button id="ButtonAddNew" type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- The Modal -->
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
