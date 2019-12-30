@@ -1,0 +1,33 @@
+
+.navbar{
+    
+    position: relative;
+   
+}
+.profile{
+    background-color: 	#7AB8CC;
+    height:800px;
+    position: relative;
+   
+    
+}
+/* .profilepic{
+    height: 65%;
+    width: 15%;
+    z-index: 10000;
+    position: relative;
+    margin-left: 25%;
+    margin-top: 0;
+} */
+.skill{
+    background-color:#043B5B;
+    height:800px;
+    position: relative;
+
+}
+.protofio{
+    height: 30%;
+    width: 50%;
+    position: relative;
+    float: left;
+}
