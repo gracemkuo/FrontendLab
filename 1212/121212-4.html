@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .container {
+            background-color: cadetblue;
+            height: 500px;
+            width: 600px;
+            padding: 50px;
+
+        }
+        img{
+            height: 150px;
+            width: 150px;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <!-- <div>
+        <div id="block1" class="row">
+            <label class="col-md-6">{{tittle}}</label>
+        </div>
+        <div id="block2" class="row">
+            <input type="text" v-model='tittle' class="col-md-6">
+        </div>
+        <div class="row">
+            <input type="button" id="block3" value="顯示model">
+        </div>
+    </div> -->
+    <div class="container mt-5 ml-5" id="block1">
+        <div class="row">
+
+            <div class="col-6">
+                <div class="row">
+                    <label for="">資料編號:{{ID}}</label>
+                </div>
+                <div class="row">
+                    <label for="">職稱</label>
+                </div>
+                <div class="row">
+                    <input type="text" v-model='title' value=""> </div>
+                <div class="row">
+                    <label for="">姓名</label>
+                </div>
+                <div class="row">
+                    <input type="text" v-model='name' value="">
+                </div>
+                <div class="row">
+                    <label for="">電話</label>
+                </div>
+                <div class="row">
+                    <input type="text" v-model='Phone' value="">
+                </div>
+                <div class="row">
+                    <label for="">地址</label>
+                </div>
+                <div class="row">
+                    <input type="text" v-model='Address' value="" style="width: 100%;">
+                </div>
+                <div class="row">
+                    <label for="">備註</label>
+                </div>
+                <div class="row">
+                    <input type="text" v-model='Memo' value="">
+                </div>
+            </div>
+            <div class="col-6">
+                <img v-bind:src="PictureURL" >
+            </div>
+        </div>
+        <div class="row mt-5">
+            <button id="btn">取得資料</button>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+    <script>
+        var json =
+        {
+            ID: 3,
+            title: "總裁", name: "Eric", PictureURL: "https://i.imgur.com/uxvy97n.png", Phone: "0912345678",
+            Address: "新竹市大同區二三五路四號六樓",
+            Memo: "澳洲來的人", isValid: true
+        };
+
+        function Binding() {
+            new Vue({
+                el: '#block1',
+                data: json
+            })
+            // new Vue({
+            //     el: '#block2',
+            //     data: json
+            // })
+        }
+        $(() => {
+            Binding();
+           $("#btn").click(function () {
+           alert (JSON.stringify(json));    
+           }
+           )
+        })
+    </script>
+</body>
+
+</html>
