@@ -26,7 +26,7 @@ z-index: 1; */
 }
 .layer1{
     position: absolute;
-    height: 340px;
+    height: 380px;
     background-color:#043B5B ;
     width: 250px;
     z-index: 0;
@@ -34,7 +34,7 @@ z-index: 1; */
     margin-left: 25%;
 }
 .profilepic{
-    height: 48%;
+    height: 60%;
     width: 15%;
     z-index: 1;
     position: absolute;
