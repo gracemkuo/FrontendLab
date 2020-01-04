@@ -13,7 +13,62 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="grace-resume.css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Playfair+Display&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cb2bb3c36c.js" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
 
+            window.sr = ScrollReveal();
+
+            if ($(window).width() < 768) {
+
+                if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+                    $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+                }
+
+                sr.reveal('.js--fadeInRight', {
+                    origin: 'right',
+                    distance: '300px',
+                    easing: 'ease-in-out',
+                    duration: 800,
+                });
+
+            } else {
+
+                sr.reveal('.js--fadeInLeft', {
+                    origin: 'left',
+                    distance: '300px',
+                    easing: 'ease-in-out',
+                    duration: 800,
+                });
+
+                sr.reveal('.js--fadeInRight', {
+                    origin: 'right',
+                    distance: '300px',
+                    easing: 'ease-in-out',
+                    duration: 800,
+                });
+
+            }
+
+            sr.reveal('.js--fadeInLeft', {
+                origin: 'left',
+                distance: '300px',
+                easing: 'ease-in-out',
+                duration: 800,
+            });
+
+            sr.reveal('.js--fadeInRight', {
+                origin: 'right',
+                distance: '300px',
+                easing: 'ease-in-out',
+                duration: 800,
+            });
+
+
+        });
+
+    </script>
 
 </head>
 
@@ -34,16 +89,26 @@
     </div>
     <!-- --content -->
     <div class="container-all profile">
-        <!-- <img src="/GraceResume/IMG_1359.JPG" class="profilepic"> -->
+        <div class="layer1"></div>
+
+        <img src="/GraceResume/IMG_1359.JPG" class="profilepic">
+        <div class="name1">
+
+            <span>Grace Marie Kuo</span>
+        </div>
+        <div class="name2">
+
+            <span>Grace Marie Kuo</span>
+        </div>
     </div>
 
     <!-- --Skill -->
     <div class="container-all skill">
-
+        <div class="topic">01 Professional</div>
     </div>
     <!-- --Project -->
     <div class="container-all project">
-
+        <div class="topic " style="color: #043B5B;">02 protofio</div>
         <img class="protofio" src="/GraceResume/pic1.jpg">
         <img class="protofio" src="/GraceResume/pic2.jpg">
         <img class="protofio" src="/GraceResume/pic3.jpg">
@@ -52,30 +117,41 @@
         <img class="protofio" src="/GraceResume/pic6.jpg">
         <img class="protofio" src="/GraceResume/pic7.jpg">
         <img class="protofio" src="/GraceResume/pic8.jpg">
-        
-<!-- 
-        <div class="row">
-            <div class="col"><img class="protofio" src="/GraceResume/pic1.jpg"></div>
-            <div class="col"><img  class="protofio" class="protofio" src="/GraceResume/pic2.jpg"></div>
+        <!-- --video about Project Gemma-->
     </div>
-        <div class="row">   
-            <div class="col"><img class="protofio" class="protofio" src="/GraceResume/pic3.jpg"></div>
-            <div class="col"><img  class="protofio" src="/GraceResume/pic4.jpg"></div>
-        </div>
-        <div class="row">
-
-            <div class="col"><img  class="protofio" src="/GraceResume/pic5.jpg"></div>
-            <div class="col"><img  class="protofio" src="/GraceResume/pic6.jpg"></div>
-        </div>
-        <div class="row">
-            <div class="col"><img  class="protofio" src="/GraceResume/pic7.jpg"></div>
-            <div class="col"><img class="protofio"  src="/GraceResume/pic8.jpg"></div>
-        </div>
-    </div> -->
+    <!-- --timeline -->
+    <div class="container-all timeline1">
+        <div class="topic">03 Build School</div>
+        
+    </div>
     <!-- --Experience -->
-    <!-- --Contact -->
-    <!-- --footer -->
 
+    <div class="container-all experience">
+        <div class="topic">04 Experience</div>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <!-- --Contact -->
+    <div class="container-all contact">
+        <div class="topic">05 Contact Me</div>
+        <div class="fafafont"><i class="fas fa-envelope-square"></i>
+            <span>
+
+                gracemkuo841210@gmail.com
+            </span></br><i class="fab fa-linkedin"></i>
+            <span>
+                https://www.linkedin.com/in/kuoeating/
+            </span>
+            </br> <i class="fas fa-phone-square"></i>
+            <span>
+                (+886) 0905-027-630
+            </span>
+        </div>
+    </div>
+    <!-- --footer -->
+    <div class="container-all footer">
+
+    </div>
 </body>
 
 </html>
